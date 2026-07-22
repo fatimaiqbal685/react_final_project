@@ -1,8 +1,8 @@
-function Footer({footerText}) {
+function Footer() {
   return (
-    <footer>
-      {footerText}
-    </footer>
+   <div style={{backgroundColor:"black"}}>
+   
+   </div>
   );
 }
 
