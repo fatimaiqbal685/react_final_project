@@ -15,21 +15,44 @@ export const fetchCharacters = createAsyncThunk(
   },
 );
 
+
+
+export const fetchSingleCharacter = createAsyncThunk(
+  "characters/fetchSingleCharacter",
+  async (id) => {
+    const res = await fetch(
+      `https://rickandmortyapi.com/api/character/${id}`
+    );
+
+    return await res.json();
+  }
+);
+
+
+
+
 const initialState = {
   characters: [],
-  status: "idle",
+  singleCharacter: null,
+
+  status: "",
   pagination: {
     count: 0,
     pages: 0,
-    next: null,
-    prev: null,
+    next: "",
+    prev: "",
   },
 };
 
 export const characterSlice = createSlice({
   name: "character",
   initialState,
-  reducers: {},
+  reducers: {
+selectSingleCharatcer :(state,action)=>{
+  state.singleCharacter=action.payload
+}
+
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchCharacters.pending, (state) => {
@@ -39,11 +62,23 @@ export const characterSlice = createSlice({
         state.status = "succeeded";
         state.characters = action.payload.results;
         state.pagination = action.payload.info;
-       
-      });
-    //  addCase(fatchCharacters.rejected, (state, action) => {});
-  },
-});
+          })
+      
+          .addCase(fetchSingleCharacter.pending, (state) => {
+      state.status = "loading...";
+    })
+
+    .addCase(fetchSingleCharacter.fulfilled, (state, action) => {
+      state.status = "succeeded";
+      state.singleCharacter = action.payload;
+    });
+
+  }
+})
+
+
+
+
 
 // export const selectData = (state) => console.log(state, "state here");
 // export const selectData = (state) => state?.characters?.characters?.results;

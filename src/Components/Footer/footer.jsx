@@ -1,8 +1,7 @@
 function Footer() {
   return (
-   <div style={{backgroundColor:"black"}}>
-   
-   </div>
+ <>
+ </>
   );
 }
 

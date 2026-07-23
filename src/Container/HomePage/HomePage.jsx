@@ -24,9 +24,14 @@ console.log("redux state:", {characters,pagination,status})
     setCurrentPage(page);
     dispatch(fetchCharacters({ page }));
   };
+
+ 
+
+
+
   return (
     <MainLayout>
-      <Row  gutter={[12, 12]}>
+      <Row  gutter={[20, 20]} style={{alignItems:"center"}}>
         {status === "loading" && <p>Loading...</p>}
         {characters?.map((character) => (
           <Col lg={6} key={character.id} >
