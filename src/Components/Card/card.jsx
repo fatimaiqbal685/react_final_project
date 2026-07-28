@@ -1,33 +1,42 @@
 import { Link } from "react-router-dom";
-import { Badge,Row ,Col} from "antd";
 
 function Cards({ character }) {
-  const statusColor = {
-    Alive:"success",
-    Dead:"error",
-    unknown:"default"
-  }
+  const statusClass = {
+    Alive: "character-card__status-dot--alive",
+    Dead: "character-card__status-dot--dead",
+    unknown: "character-card__status-dot--unknown",
+  };
+
   return (
-   
-<div style={{border: "1px solid #5e5252", borderRadius:"12px",width:"80%",marginTop:"20px",height:"70vh"}} >
- <img src={character.image} alt={character.name} style={{width:"100%",borderRadius:"12px"}} />
-     <Row style={{display:"flex",alignItems:"center",gap:"8px",padding:"10px"}}>
-    
-       <Badge status={statusColor[character.status]} />
-
-             <h2 style={{marginLeft:"10px",fontSize:"16px",marginTop:"20px"}}>{character.name}</h2>
-            
-             </Row>
-               <Link to={`/characters/${character.id}`} >
-                                <button style={{padding:"10px 20px",marginLeft:"10px",marginTop:"10px"}}>
-                                    View Details
-                                </button>
-
-                            </Link>
-
-</div>
-
-  )
+    <Link to={`/characters/${character.id}`}>
+      <article className="character-card">
+        <img
+          className="character-card__image"
+          src={character.image}
+          alt={character.name}
+        />
+        <div className="character-card__content">
+          <h2 className="character-card__name">{character.name}</h2>
+          <div className="character-card__status">
+            <span
+              className={`character-card__status-dot ${statusClass[character.status] || statusClass.unknown}`}
+            />
+            <span>
+              {character.status} - {character.species}
+            </span>
+          </div>
+          <div className="character-card__field">
+            <p className="character-card__label">Last known location:</p>
+            <p className="character-card__value">{character.location.name}</p>
+          </div>
+          <div className="character-card__field">
+            <p className="character-card__label">First seen in:</p>
+            <p className="character-card__value">{character.origin.name}</p>
+          </div>
+        </div>
+      </article>
+    </Link>
+  );
 }
 
 export default Cards;

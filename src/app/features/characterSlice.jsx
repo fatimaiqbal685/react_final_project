@@ -2,12 +2,11 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchCharacters = createAsyncThunk(
   "characters/fetchCharacters",
-  async ({page = 1}) => {
+  async ({page = 1, query = ""}) => {
     try {
-      const url = `https://rickandmortyapi.com/api/character?page=${page}`;
+      const url = `https://rickandmortyapi.com/api/character?page=${page}&name=${encodeURIComponent(query)}`;
       const res = await fetch(url);
       const charactersData = await res.json();
-      // console.log(charactersData, "data here 2 ");
       return charactersData;
     } catch (error) {
       console.log(error);
@@ -31,10 +30,11 @@ export const fetchSingleCharacter = createAsyncThunk(
 
 
 
+
 const initialState = {
   characters: [],
   singleCharacter: null,
-
+ recentVisitedProfile: [],
   status: "",
   pagination: {
     count: 0,
@@ -50,8 +50,14 @@ export const characterSlice = createSlice({
   reducers: {
 selectSingleCharatcer :(state,action)=>{
   state.singleCharacter=action.payload
-}
-
+  
+},
+selectRecentVisitedProfile: (state, action) => {
+      state.recentVisitedProfile = state.recentVisitedProfile.filter((item) => {
+        return item.id !== action.payload.id;
+      });
+      state.recentVisitedProfile.unshift(action.payload);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -84,4 +90,9 @@ selectSingleCharatcer :(state,action)=>{
 // export const selectData = (state) => state?.characters?.characters?.results;
 // export const paginationData = (state) => state?.characters?.pagination;
 
+
+// export const { selectProfile } = recentProfileSlice.action;
+export const selectVisitedProfile = (state) =>
+  state.character?.recentVisitedProfile;
+export const { selectRecentVisitedProfile ,selectSingleCharatcer} = characterSlice.actions;
 export default characterSlice.reducer;

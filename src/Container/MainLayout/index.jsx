@@ -1,9 +1,5 @@
 function MainLayout({ children }) {
-  return (
-    <div className="min-h-screen bg-[#121212] text-white">
-      {children}
-    </div>
-  );
+  return <main className="main-layout">{children}</main>;
 }
 
 export default MainLayout;
