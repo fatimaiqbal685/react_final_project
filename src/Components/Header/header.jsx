@@ -7,25 +7,32 @@ function Header() {
   return (
     <header className="app-header">
       <nav className="app-nav">
-        <Link to="/characters" className="app-nav__logo">
-          <img
-            src="https://rickandmortyapi.com/icon.jpeg"
-            alt="Rick and Morty"
-          />
-          <span className="app-nav__brand">Rick & Morty</span>
-        </Link>
+        <span className="app-nav__brand">Rick & Morty</span>
+
+        <div className="app-nav__actions">
+          <button type="button" className="app-nav__search-btn">
+            Search
+          </button>
+          <button type="button" className="app-nav__icon-btn" aria-label="Search">
+            🔍
+          </button>
+        </div>
+
         <div className="app-nav__links">
+          <Link to="/characters" className={`app-nav__btn ${isActive("/characters") ? "app-nav__btn--active" : ""}`}>
+            View All Characters
+          </Link>
           <Link
             to="/episodes"
             className={`app-nav__btn ${isActive("/episodes") ? "app-nav__btn--active" : ""}`}
           >
-            All Episodes
+            Get All Episodes
           </Link>
           <Link
             to="/locations"
             className={`app-nav__btn ${isActive("/locations") ? "app-nav__btn--active" : ""}`}
           >
-            All Locations
+            Get All Locations
           </Link>
         </div>
       </nav>

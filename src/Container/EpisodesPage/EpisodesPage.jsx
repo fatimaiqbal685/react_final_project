@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import MainLayout from "../MainLayout";
 import PaginationComponent from "../Pagination/Pagination";
 
@@ -22,29 +23,38 @@ function EpisodesPage() {
 
   return (
     <MainLayout>
-    
-      <h2 className="page-title">All Episodes</h2>
+      <section className="page-banner page-banner--home">
+        <div className="page-banner__actions">
+          <Link to="/" className="app-nav__btn">
+            Back to Landing Page
+          </Link>
+        </div>
+        <h1 className="page-banner__title">All Episodes</h1>
+        <p className="page-banner__subtitle">
+          Browse episodes in a polished dashboard-style layout for fast scanning.
+        </p>
+      </section>
       {status === "loading" && (
         <p className="loading-text">Loading episodes...</p>
       )}
       <div className="info-grid">
         {episodes.map((episode) => (
-          <article key={episode.id} className="info-card">
-            <div className="info-card__badge">{episode.episode}</div>
-            <div className="info-card__content">
-              <h3 className="info-card__name">{episode.name}</h3>
-              <div className="info-card__field">
-                <p className="info-card__label">Air date:</p>
-                <p className="info-card__value">{episode.air_date}</p>
+          <Link key={episode.id} to={`/episodes/${episode.id}`} className="info-card-link">
+            <article className="info-card info-card--episode">
+              <div className="info-card__badge">{episode.episode}</div>
+              <div className="info-card__content">
+                <h3 className="info-card__name">{episode.name}</h3>
+                <p className="info-card__description">Aired {episode.air_date}</p>
+                <div className="info-card__field info-card__field--inline">
+                  <p className="info-card__label">Characters</p>
+                  <p className="info-card__value">{episode.characters.length}</p>
+                </div>
               </div>
-              <div className="info-card__field">
-                <p className="info-card__label">Characters:</p>
-                <p className="info-card__value">
-                  {episode.characters.length} characters
-                </p>
+              <div className="info-card__footer">
+                <span className="info-card__pill">{episode.episode}</span>
               </div>
-            </div>
-          </article>
+            </article>
+          </Link>
         ))}
       </div>
       {pagination?.count > 20 && (

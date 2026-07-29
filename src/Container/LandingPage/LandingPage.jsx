@@ -18,14 +18,10 @@ function LandingPage() {
   return (
     <>
       <section className="app-hero">
+      <h1 className="app-hero__title">The Rick and Morty Website</h1>
         <Link to="/characters" className="app-hero__link">
-          <img
-            className="app-hero__watermark"
-            src="https://rickandmortyapi.com/icon.jpeg"
-            alt=""
-            aria-hidden="true"
-          />
-          <h1 className="app-hero__title">The Rick and Morty Website</h1>
+        View All Characters
+         
         </Link>
       </section>
 
@@ -38,11 +34,7 @@ function LandingPage() {
             <Cards key={character.id} character={character} />
           ))}
         </div>
-        <div className="landing-cta">
-          <Link to="/characters" className="landing-cta__btn">
-            View All Characters
-          </Link>
-        </div>
+      
       </MainLayout>
     </>
   );

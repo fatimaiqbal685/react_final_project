@@ -80,9 +80,32 @@ useEffect(() => {
                </Row>
 
                 <Row style={{marginTop:"10px", marginLeft:"10px"}}>
-                
-                Location: {singleCharacter?.location.name}
-               
+                Location:{" "}
+                <Link
+                  to={
+                    singleCharacter?.location?.url
+                      ? `/locations/${singleCharacter.location.url.split("/").pop()}`
+                      : "/locations"
+                  }
+                  className="profile-link"
+                >
+                  {singleCharacter?.location.name}
+                </Link>
+               </Row>
+               <Row style={{marginTop:"10px", marginLeft:"10px"}}>
+                Episode:{" "}
+                <Link
+                  to={
+                    singleCharacter?.episode?.[0]
+                      ? `/episodes/${singleCharacter.episode[0].split("/").pop()}`
+                      : "/episodes"
+                  }
+                  className="profile-link"
+                >
+                  {singleCharacter?.episode?.[0]
+                    ? `Episode ${singleCharacter.episode[0].split("/").pop()}`
+                    : "View episodes"}
+                </Link>
                </Row>
               </Col>
                  </Row>

@@ -5,10 +5,10 @@ function PaginationComponent({ onChange, total, pageSize, currentPage }) {
 
 const itemRender = (_, type, originalElement) => {
   if (type === 'prev') {
-    return <a>Previous</a>;
+    return <a style={{ color: '#ffffff' }}>Previous</a>;
   }
   if (type === 'next') {
-    return <a>Next</a>;
+    return <a style={{ color: '#ffffff' }}>Next</a>;
   }
   return originalElement;
 };

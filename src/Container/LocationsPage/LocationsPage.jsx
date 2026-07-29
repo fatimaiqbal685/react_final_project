@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import MainLayout from "../MainLayout";
 import PaginationComponent from "../Pagination/Pagination";
 
@@ -22,32 +23,40 @@ function LocationsPage() {
 
   return (
     <MainLayout>
-      <h2 className="page-title">All Locations</h2>
+      <section className="page-banner page-banner--home">
+        <div className="page-banner__actions">
+          <Link to="/" className="app-nav__btn">
+            Back 
+          </Link>
+        </div>
+      
+       
+      </section>
       {status === "loading" && (
         <p className="loading-text">Loading locations...</p>
       )}
       <div className="info-grid">
         {locations.map((location) => (
-          <article key={location.id} className="info-card">
-            <div className="info-card__icon">📍</div>
-            <div className="info-card__content">
-              <h3 className="info-card__name">{location.name}</h3>
-              <div className="info-card__field">
-                <p className="info-card__label">Type:</p>
-                <p className="info-card__value">{location.type}</p>
+          <Link
+            key={location.id}
+            to={`/locations/${location.id}`}
+            className="info-card-link"
+          >
+            <article className="info-card info-card--location">
+              <div className="info-card__icon">📍</div>
+              <div className="info-card__content">
+                <h3 className="info-card__name">{location.name}</h3>
+                <p className="info-card__description">{location.type} · {location.dimension}</p>
+                <div className="info-card__field info-card__field--inline">
+                  <p className="info-card__label">Residents</p>
+                  <p className="info-card__value">{location.residents.length}</p>
+                </div>
               </div>
-              <div className="info-card__field">
-                <p className="info-card__label">Dimension:</p>
-                <p className="info-card__value">{location.dimension}</p>
+              <div className="info-card__footer">
+                <span className="info-card__pill">{location.type || "Unknown"}</span>
               </div>
-              <div className="info-card__field">
-                <p className="info-card__label">Residents:</p>
-                <p className="info-card__value">
-                  {location.residents.length} residents
-                </p>
-              </div>
-            </div>
-          </article>
+            </article>
+          </Link>
         ))}
       </div>
       {pagination?.count > 20 && (

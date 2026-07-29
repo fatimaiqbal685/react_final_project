@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import MainLayout from "../../Container/MainLayout";
 import Cards from "../../Components/Card/card";
 import PaginationComponent from "../../Container/Pagination/Pagination";
@@ -31,16 +32,13 @@ function HomePage() {
 
   return (
     <>
-      <section className="page-banner">
-        <h1 className="page-banner__title">All Characters</h1>
-        <div className="app-search">
-          <input
-            type="text"
-            placeholder="Search Characters..."
-            value={query}
-            onChange={handleSearch}
-          />
+      <section className="page-banner page-banner--home">
+        <div className="page-banner__actions">
+          <Link to="/" className="app-nav__btn">
+            Back to Landing Page
+          </Link>
         </div>
+        <h1 className="page-banner__title">All Characters</h1>
       </section>
 
       <MainLayout>
