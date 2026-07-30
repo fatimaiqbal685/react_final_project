@@ -26,7 +26,7 @@ function EpisodesPage() {
       <section className="page-banner page-banner--home">
         <div className="page-banner__actions">
           <Link to="/" className="app-nav__btn">
-            Back to Landing Page
+            Back
           </Link>
         </div>
         <h1 className="page-banner__title">All Episodes</h1>

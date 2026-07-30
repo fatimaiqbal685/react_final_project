@@ -79,7 +79,7 @@ a {
 }
 
 .app-nav__search-btn {
-  padding: 10px 18px;
+  padding: 10px 60px;
   background: transparent;
   color: #202329;
   font-weight: 600;
@@ -95,7 +95,7 @@ a {
   height: 42px;
   background: #2e6ef7;
   color: #ffffff;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .app-nav__icon-btn:hover {
@@ -103,7 +103,7 @@ a {
 }
 
 .app-nav__btn {
-  padding: 10px 20px;
+  padding: 10px 10px;
   border: 2px solid #202329;
   border-radius: 8px;
   background: transparent;
@@ -246,7 +246,7 @@ a {
 
 .character-grid--landing {
   grid-template-columns: repeat(2, 1fr);
-  max-width: 900px;
+  max-width: 600px;
 }
 
 @media (max-width: 640px) {
